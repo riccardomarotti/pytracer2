@@ -1,6 +1,6 @@
 version: '3'
 services:
-  tensorflow:
+  pytracer:
     user: ric
     container_name: pytracer
     image: laruen/tensorflow:latest
