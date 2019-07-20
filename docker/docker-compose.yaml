@@ -1,0 +1,16 @@
+version: '3'
+services:
+  tensorflow:
+    user: ric
+    container_name: pytracer
+    image: laruen/tensorflow:latest
+    environment:
+      DISPLAY: $DISPLAY
+    volumes:
+      - '~/.Xauthority:/home/ric/.Xauthority:rw'
+      - '~/pytracer2:/home/ric/pytracer'
+      - '~/.gitconfig:/home/ric/.gitconfig'
+      - './vscodeGlobalConfig:/home/ric/.vscode'
+    network_mode: host
+    stdin_open: true
+    tty: true
