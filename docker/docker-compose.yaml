@@ -10,7 +10,8 @@ services:
       - '~/.Xauthority:/home/ric/.Xauthority:rw'
       - '~/pytracer2:/home/ric/pytracer'
       - '~/.gitconfig:/home/ric/.gitconfig'
-      - './vscodeGlobalConfig:/home/ric/.vscode'
+      - './vscodeDotConfig:/home/ric/.vscode'
+      - './vscodeGlobalConfig:/home/ric/.config/Code'
     network_mode: host
     stdin_open: true
     tty: true
