@@ -6,4 +6,4 @@ RUN add-apt-repository "deb [arch=amd64] https://packages.microsoft.com/repos/vs
 RUN apt update && apt install libx11-xcb-dev libasound2 code git -y
 RUN useradd -m ric
 RUN echo "ric ALL=NOPASSWD: ALL" >> /etc/sudoers
-RUN pip install pylint pytest autopep8
+RUN pip install pylint pytest autopep8 rope
