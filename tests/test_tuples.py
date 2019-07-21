@@ -1,6 +1,7 @@
-from pytracer.tuples import point, vector
+from pytracer.tuples import point, vector, normalize, dot, cross
 import tensorflow as tf
 import numpy as np
+import math
 
 
 def test_a_point_is_an_array_with_w_set_to_1():
@@ -74,5 +75,84 @@ def test_difference_of_two_vectors_is_a_vector():
 
     with tf.Session() as sess:
         result = sess.run([v1-v2, expected_vector])
+
+    assert((result[0] == result[1]).all())
+
+
+def test_multiply_a_vector_by_a_scalar():
+    v = vector(1, -2, 3)
+    scalar = 3.5
+    expected_vector = vector(3.5, -7, 10.5)
+
+    with tf.Session() as sess:
+        result = sess.run([v * scalar, expected_vector])
+
+    assert((result[0] == result[1]).all())
+
+
+def test_multiply_a_vector_by_a_fraction():
+    v = vector(1, -2, 3)
+    scalar = 0.5
+    expected_vector = vector(0.5, -1, 1.5)
+
+    with tf.Session() as sess:
+        result = sess.run([v * scalar, expected_vector])
+
+    assert((result[0] == result[1]).all())
+
+
+def test_dividing_a_vector_by_a_scalar():
+    v = vector(1, -2, 3)
+    scalar = 2
+    expected_vector = vector(0.5, -1, 1.5)
+
+    with tf.Session() as sess:
+        result = sess.run([v / scalar, expected_vector])
+
+    assert((result[0] == result[1]).all())
+
+
+def test_computing_the_magnitude_of_vector():
+    actual_magnitude = tf.norm(vector(-1, -2, -3))
+    expected_magnitude = tf.constant(math.sqrt(14))
+
+    with tf.Session() as sess:
+        result = sess.run([actual_magnitude, expected_magnitude])
+
+    np.testing.assert_almost_equal(result[0], result[1], 7)
+
+
+def test_normalize_vector():
+    v = vector(1, 2, 3)
+    expected_vector = vector(1. / math.sqrt(14),
+                             2. / math.sqrt(14),
+                             3. / math.sqrt(14))
+    actual_vector = normalize(v)
+
+    with tf.Session() as sess:
+        result = sess.run([actual_vector, expected_vector])
+
+    assert((result[0] == result[1]).all())
+
+
+def test_dot_product_of_vectors():
+    v1 = vector(1, 2, 3)
+    v2 = vector(2, 3, 4)
+    actual_dot_product = dot(v1, v2)
+
+    with tf.Session() as sess:
+        result = sess.run(actual_dot_product)
+
+    assert(result == 20)
+
+
+def test_cross_product_of_vectors():
+    v1 = vector(1, 2, 3)
+    v2 = vector(2, 3, 4)
+    actual_cross_product = cross(v1, v2)
+    expected_cross_product = vector(-1, 2, -1)
+
+    with tf.Session() as sess:
+        result = sess.run([actual_cross_product, expected_cross_product])
 
     assert((result[0] == result[1]).all())
