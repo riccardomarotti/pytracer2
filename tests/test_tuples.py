@@ -9,9 +9,9 @@ def test_a_point_is_an_array_with_w_set_to_1():
     expected_point = tf.constant(np.array([4.3, -4.2, 3.1, 1.0]))
 
     with tf.Session() as sess:
-        result = sess.run([actual_point, expected_point])
+        actual, expected = sess.run([actual_point, expected_point])
 
-    assert((result[0] == result[1]).all())
+    assert((actual == expected).all())
 
 
 def test_a_vector_is_an_array_with_w_set_to_0():
@@ -19,9 +19,9 @@ def test_a_vector_is_an_array_with_w_set_to_0():
     expected_vector = tf.constant(np.array([4.3, -4.2, 3.1, 0]))
 
     with tf.Session() as sess:
-        result = sess.run([actual_vector, expected_vector])
+        actual, expected = sess.run([actual_vector, expected_vector])
 
-    assert((result[0] == result[1]).all())
+    assert((actual == expected).all())
 
 
 def test_sum_of_two_vectors_is_a_vector():
@@ -30,9 +30,9 @@ def test_sum_of_two_vectors_is_a_vector():
     expected_vector = vector(1, 1, 6)
 
     with tf.Session() as sess:
-        result = sess.run([v1 + v2, expected_vector])
+        actual, expected = sess.run([v1 + v2, expected_vector])
 
-    assert((result[0] == result[1]).all())
+    assert((actual == expected).all())
 
 
 def test_sum_of_vector_and_point_is_a_point():
@@ -41,9 +41,9 @@ def test_sum_of_vector_and_point_is_a_point():
     expected_point = point(1, 1, 6)
 
     with tf.Session() as sess:
-        result = sess.run([v + p, expected_point])
+        actual, expected = sess.run([v + p, expected_point])
 
-    assert((result[0] == result[1]).all())
+    assert((actual == expected).all())
 
 
 def test_difference_of_two_point_is_a_vector():
@@ -52,9 +52,9 @@ def test_difference_of_two_point_is_a_vector():
     expected_vector = vector(-2, -4, -6)
 
     with tf.Session() as sess:
-        result = sess.run([p1-p2, expected_vector])
+        actual, expected = sess.run([p1-p2, expected_vector])
 
-    assert((result[0] == result[1]).all())
+    assert((actual == expected).all())
 
 
 def test_difference_of_a_vector_and_a_point_is_a_point():
@@ -63,9 +63,9 @@ def test_difference_of_a_vector_and_a_point_is_a_point():
     expected_point = point(-2, -4, -6)
 
     with tf.Session() as sess:
-        result = sess.run([p-v, expected_point])
+        actual, expected = sess.run([p-v, expected_point])
 
-    assert((result[0] == result[1]).all())
+    assert((actual == expected).all())
 
 
 def test_difference_of_two_vectors_is_a_vector():
@@ -74,9 +74,9 @@ def test_difference_of_two_vectors_is_a_vector():
     expected_vector = vector(-2, -4, -6)
 
     with tf.Session() as sess:
-        result = sess.run([v1-v2, expected_vector])
+        actual, expected = sess.run([v1-v2, expected_vector])
 
-    assert((result[0] == result[1]).all())
+    assert((actual == expected).all())
 
 
 def test_multiply_a_vector_by_a_scalar():
@@ -85,9 +85,9 @@ def test_multiply_a_vector_by_a_scalar():
     expected_vector = vector(3.5, -7, 10.5)
 
     with tf.Session() as sess:
-        result = sess.run([v * scalar, expected_vector])
+        actual, expected = sess.run([v * scalar, expected_vector])
 
-    assert((result[0] == result[1]).all())
+    assert((actual == expected).all())
 
 
 def test_multiply_a_vector_by_a_fraction():
@@ -96,9 +96,9 @@ def test_multiply_a_vector_by_a_fraction():
     expected_vector = vector(0.5, -1, 1.5)
 
     with tf.Session() as sess:
-        result = sess.run([v * scalar, expected_vector])
+        actual, expected = sess.run([v * scalar, expected_vector])
 
-    assert((result[0] == result[1]).all())
+    assert((actual == expected).all())
 
 
 def test_dividing_a_vector_by_a_scalar():
@@ -107,9 +107,9 @@ def test_dividing_a_vector_by_a_scalar():
     expected_vector = vector(0.5, -1, 1.5)
 
     with tf.Session() as sess:
-        result = sess.run([v / scalar, expected_vector])
+        actual, expected = sess.run([v / scalar, expected_vector])
 
-    assert((result[0] == result[1]).all())
+    assert((actual == expected).all())
 
 
 def test_computing_the_magnitude_of_vector():
@@ -117,9 +117,9 @@ def test_computing_the_magnitude_of_vector():
     expected_magnitude = tf.constant(math.sqrt(14))
 
     with tf.Session() as sess:
-        result = sess.run([actual_magnitude, expected_magnitude])
+        actual, expected = sess.run([actual_magnitude, expected_magnitude])
 
-    np.testing.assert_almost_equal(result[0], result[1], 7)
+    np.testing.assert_almost_equal(actual, expected, 7)
 
 
 def test_normalize_vector():
@@ -130,9 +130,9 @@ def test_normalize_vector():
     actual_vector = normalize(v)
 
     with tf.Session() as sess:
-        result = sess.run([actual_vector, expected_vector])
+        actual, expected = sess.run([actual_vector, expected_vector])
 
-    assert((result[0] == result[1]).all())
+    assert((actual == expected).all())
 
 
 def test_dot_product_of_vectors():
@@ -141,9 +141,9 @@ def test_dot_product_of_vectors():
     actual_dot_product = dot(v1, v2)
 
     with tf.Session() as sess:
-        result = sess.run(actual_dot_product)
+        actual = sess.run(actual_dot_product)
 
-    assert(result == 20)
+    assert(actual == 20)
 
 
 def test_cross_product_of_vectors():
@@ -153,6 +153,7 @@ def test_cross_product_of_vectors():
     expected_cross_product = vector(-1, 2, -1)
 
     with tf.Session() as sess:
-        result = sess.run([actual_cross_product, expected_cross_product])
+        actual, expected = sess.run(
+            [actual_cross_product, expected_cross_product])
 
-    assert((result[0] == result[1]).all())
+    assert((actual == expected).all())
