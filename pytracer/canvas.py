@@ -7,12 +7,9 @@ class Canvas:
         self._width = width
         self._height = height
         if pixels is None:
-            self._pixels = np.zeros((width, height, 3))
+            self._pixels = tf.zeros((width, height, 3))
         else:
             self._pixels = pixels
-
-    def pixels_tensor(self):
-        return tf.constant(self._pixels)
 
     @property
     def width(self):
@@ -28,5 +25,7 @@ class Canvas:
 
     def write_pixel(self, x, y, color):
         with tf.Session() as sess:
-            color = sess.run(color)
-        self.pixels[x, y] = color
+            colors, color = sess.run([self._pixels, color])
+
+        colors[x, y] = color
+        self._pixels = tf.constant(colors)
