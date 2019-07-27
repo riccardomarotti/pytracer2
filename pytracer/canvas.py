@@ -23,9 +23,8 @@ class Canvas:
     def pixels(self):
         return self._pixels
 
-    def write_pixel(self, x, y, color):
-        with tf.Session() as sess:
-            colors, color = sess.run([self._pixels, color])
-
-        colors[x, y] = color
-        self._pixels = tf.constant(colors)
+    def add_color_to_pixel(self, x, y, color):
+        indices = tf.constant(np.array([[x, y, 0], [x, y, 1], [x, y, 2]]))
+        update = tf.SparseTensor(
+            indices, [color[0], color[1], color[2]], self.pixels.shape)
+        self._pixels = self.pixels + tf.sparse_tensor_to_dense(update)

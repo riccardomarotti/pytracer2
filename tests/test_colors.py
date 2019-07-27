@@ -14,7 +14,7 @@ def test_adding_colors():
     with tf.Session() as sess:
         actual, expected = sess.run([actual_sum, expected_sum])
 
-    assert((actual == expected).all())
+    np.testing.assert_almost_equal(actual, expected)
 
 
 def test_subtracting_colors():
