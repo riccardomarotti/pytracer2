@@ -3,13 +3,10 @@ import numpy as np
 
 
 class Canvas:
-    def __init__(self, width, height, pixels=None):
+    def __init__(self, width, height):
         self._width = width
         self._height = height
-        if pixels is None:
-            self._pixels = tf.zeros((width, height, 3))
-        else:
-            self._pixels = pixels
+        self._pixels = tf.zeros((width, height, 3))
 
     @property
     def width(self):
