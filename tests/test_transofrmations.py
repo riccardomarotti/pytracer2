@@ -203,3 +203,32 @@ def test_a_shearing_transformation_moves_z_in_proportion_to_y():
             [point(2, 3, 7), transform(point(2, 3, 4))])
 
     assert((expected == actual).all())
+
+
+def test_individual_transformations_are_applied_in_sequence():
+    p = point(1, 0, 1)
+    A = transformations.rotation_x(math.pi/2)
+    B = transformations.scaling(5, 5, 5)
+    C = transformations.translation(10, 5, 7)
+
+    with tf.Session() as sess:
+        [expected_p2, expected_p3, expected_p4, actual_p2, actual_p3, actual_p4] = sess.run(
+            [point(1, -1, 0), point(5, -5, 0), point(15, 0, 7), A(p), B(A(p)), C(B(A(p)))])
+
+    assert(np.allclose(expected_p2, actual_p2))
+    assert(np.allclose(expected_p3, actual_p3))
+    assert(np.allclose(expected_p4, actual_p4))
+
+
+def test_chained_transofrmations_must_be_applied_in_reverse_order():
+    p = point(1, 0, 1)
+    A = transformations.rotation_x(math.pi/2)
+    B = transformations.scaling(5, 5, 5)
+    C = transformations.translation(10, 5, 7)
+
+    CBA = transformations.concat(C, B, A)
+
+    with tf.Session() as sess:
+        [expected, actual] = sess.run([point(15, 0, 7), CBA(p)])
+
+    assert(np.allclose(expected, actual))

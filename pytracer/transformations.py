@@ -77,3 +77,12 @@ def invert(t):
     T = t(identity_matrix())
     Tinv = tf.linalg.inv(T)
     return lambda p: tf.tensordot(Tinv, p, axes=1)
+
+
+def concat(t1, *tn):
+    if len(tn) == 0:
+        return t1
+
+    t2 = tn[0]
+    rest = tn[1:]
+    return concat(lambda p: t1(t2(p)), *rest)
