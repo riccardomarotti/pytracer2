@@ -53,6 +53,16 @@ def rotation_y(alpha):
     return lambda p: tf.tensordot(T, p, axes=1)
 
 
+def rotation_z(alpha):
+    T = tf.constant(np.array([
+        [math.cos(alpha), -math.sin(alpha), 0, 0],
+        [math.sin(alpha), math.cos(alpha), 0, 0],
+        [0, 0, 1, 0],
+        [0, 0, 0, 1]
+    ]),  dtype=tf.float32)
+    return lambda p: tf.tensordot(T, p, axes=1)
+
+
 def invert(t):
     T = t(identity_matrix())
     Tinv = tf.linalg.inv(T)
