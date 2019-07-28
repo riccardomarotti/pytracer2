@@ -4,7 +4,7 @@ import math
 from pytracer.tuples import point, vector
 
 
-def identity_matrix():
+def identity_matrix(x=None):
     return tf.constant(np.array([
         [1, 0, 0, 0],
         [0, 1, 0, 0],
