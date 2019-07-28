@@ -63,6 +63,16 @@ def rotation_z(alpha):
     return lambda p: tf.tensordot(T, p, axes=1)
 
 
+def shearing(xy, xz, yx, yz, zx, zy):
+    T = tf.constant(np.array([
+        [1, xy, xz, 0],
+        [yx, 1, yz, 0],
+        [zx, zy, 1, 0],
+        [0, 0, 0, 1]
+    ]),  dtype=tf.float32)
+    return lambda p: tf.tensordot(T, p, axes=1)
+
+
 def invert(t):
     T = t(identity_matrix())
     Tinv = tf.linalg.inv(T)

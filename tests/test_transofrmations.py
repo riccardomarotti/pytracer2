@@ -144,3 +144,62 @@ def test_rotating_a_point_around_the_z_axis():
         [expected, actual] = sess.run(
             [expected_full_quarter_rotated, full_quarter(p)])
     assert(np.allclose(expected, actual))
+
+
+def test_a_shearing_transformation_moves_x_in_proportion_to_y():
+    transform = transformations.shearing(1, 0, 0, 0, 0, 0)
+
+    with tf.Session() as sess:
+        [expected, actual] = sess.run(
+            [point(5, 3, 4), transform(point(2, 3, 4))])
+
+    assert((expected == actual).all())
+
+
+def test_a_shearing_transformation_moves_x_in_proportion_to_z():
+    transform = transformations.shearing(0, 1, 0, 0, 0, 0)
+
+    with tf.Session() as sess:
+        [expected, actual] = sess.run(
+            [point(6, 3, 4), transform(point(2, 3, 4))])
+
+    assert((expected == actual).all())
+
+
+def test_a_shearing_transformation_moves_y_in_proportion_to_x():
+    transform = transformations.shearing(0, 0, 1, 0, 0, 0)
+
+    with tf.Session() as sess:
+        [expected, actual] = sess.run(
+            [point(2, 5, 4), transform(point(2, 3, 4))])
+
+    assert((expected == actual).all())
+
+
+def test_a_shearing_transformation_moves_y_in_proportion_to_z():
+    transform = transformations.shearing(0, 0, 0, 1, 0, 0)
+
+    with tf.Session() as sess:
+        [expected, actual] = sess.run(
+            [point(2, 7, 4), transform(point(2, 3, 4))])
+
+    assert((expected == actual).all())
+
+
+def test_a_shearing_transformation_moves_z_in_proportion_to_x():
+    transform = transformations.shearing(0, 0, 0, 0, 1, 0)
+
+    with tf.Session() as sess:
+        [expected, actual] = sess.run(
+            [point(2, 3, 6), transform(point(2, 3, 4))])
+
+    assert((expected == actual).all())
+
+
+def test_a_shearing_transformation_moves_z_in_proportion_to_y():
+    transform = transformations.shearing(0, 0, 0, 0, 0, 1)
+    with tf.Session() as sess:
+        [expected, actual] = sess.run(
+            [point(2, 3, 7), transform(point(2, 3, 4))])
+
+    assert((expected == actual).all())
