@@ -3,11 +3,11 @@ import numpy as np
 
 
 def point(x, y, z):
-    return tf.constant(np.array([x, y, z, 1.0]))
+    return tf.constant(np.array([x, y, z, 1.0]), dtype=tf.float32)
 
 
 def vector(x, y, z):
-    return tf.constant(np.array([x, y, z, 0.0]))
+    return tf.constant(np.array([x, y, z, 0.0]),  dtype=tf.float32)
 
 
 def normalize(v):
@@ -20,5 +20,5 @@ def dot(v1, v2):
 
 def cross(v1, v2):
     cross = tf.cross(v1[:3], v2[:3])
-    zero = tf.constant(np.array([0.]))
+    zero = tf.constant(np.array([0.]),  dtype=tf.float32)
     return tf.concat([cross, zero], -1)

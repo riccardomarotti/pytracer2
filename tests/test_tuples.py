@@ -6,7 +6,8 @@ import math
 
 def test_a_point_is_an_array_with_w_set_to_1():
     actual_point = point(4.3, -4.2, 3.1)
-    expected_point = tf.constant(np.array([4.3, -4.2, 3.1, 1.0]))
+    expected_point = tf.constant(
+        np.array([4.3, -4.2, 3.1, 1.0]),  dtype=tf.float32)
 
     with tf.Session() as sess:
         actual, expected = sess.run([actual_point, expected_point])
@@ -16,7 +17,8 @@ def test_a_point_is_an_array_with_w_set_to_1():
 
 def test_a_vector_is_an_array_with_w_set_to_0():
     actual_vector = vector(4.3, -4.2, 3.1)
-    expected_vector = tf.constant(np.array([4.3, -4.2, 3.1, 0]))
+    expected_vector = tf.constant(
+        np.array([4.3, -4.2, 3.1, 0]),  dtype=tf.float32)
 
     with tf.Session() as sess:
         actual, expected = sess.run([actual_vector, expected_vector])
@@ -114,7 +116,7 @@ def test_dividing_a_vector_by_a_scalar():
 
 def test_computing_the_magnitude_of_vector():
     actual_magnitude = tf.norm(vector(-1, -2, -3))
-    expected_magnitude = tf.constant(math.sqrt(14))
+    expected_magnitude = tf.constant(math.sqrt(14),  dtype=tf.float32)
 
     with tf.Session() as sess:
         actual, expected = sess.run([actual_magnitude, expected_magnitude])
@@ -132,7 +134,7 @@ def test_normalize_vector():
     with tf.Session() as sess:
         actual, expected = sess.run([actual_vector, expected_vector])
 
-    assert((actual == expected).all())
+    np.testing.assert_almost_equal(actual, expected, 7)
 
 
 def test_dot_product_of_vectors():
