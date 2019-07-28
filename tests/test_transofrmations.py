@@ -102,3 +102,24 @@ def test_the_inverse_of_an_x_rotation_rotates_in_the_opposite_direction():
         [expected, actual] = sess.run([expected_rotated, inverse(p)])
 
     assert(np.allclose(expected, actual))
+
+
+def test_rotating_a_point_around_the_y_axis():
+    p = point(0, 0, 1)
+    half_quarter = transformations.rotation_y(math.pi/4)
+    full_quarter = transformations.rotation_y(math.pi/2)
+    expected_half_quarted_rotated = point(math.sqrt(2)/2, 0, math.sqrt(2)/2)
+
+    with tf.Session() as sess:
+        [expected, actual] = sess.run(
+            [expected_half_quarted_rotated, half_quarter(p)])
+
+    assert(np.allclose(expected, actual))
+
+    expected_full_quarter_rotated = point(1, 0, 0)
+
+    with tf.Session() as sess:
+        [expected, actual] = sess.run(
+            [expected_full_quarter_rotated, full_quarter(p)])
+
+    assert(np.allclose(expected, actual))
