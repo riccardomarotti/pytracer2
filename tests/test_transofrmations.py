@@ -2,6 +2,7 @@ import tensorflow as tf
 import numpy as np
 from pytracer import transformations
 from pytracer.tuples import point, vector
+import math
 
 
 def test_multiplying__by_a_translation_matrix():
@@ -71,3 +72,33 @@ def test_multiplying_the_inverse_of_a_scaling_matrix():
         [expected, actual] = sess.run([expected_vector, inverse(v)])
 
     assert((expected == actual).all())
+
+
+def test_rotating_a_point_around_the_x_axis():
+    p = point(0, 1, 0)
+    half_quarter = transformations.rotation_x(math.pi/4)
+    full_quarter = transformations.rotation_x(math.pi/2)
+
+    expected_half_quarter = point(0, math.sqrt(2)/2, math.sqrt(2)/2)
+    with tf.Session() as sess:
+        [expected, actual] = sess.run([expected_half_quarter, half_quarter(p)])
+
+    assert(np.allclose(expected, actual))
+
+    expected_full_quarter = point(0, 0, 1)
+    with tf.Session() as sess:
+        [expected, actual] = sess.run([expected_full_quarter, full_quarter(p)])
+
+    assert(np.allclose(expected, actual))
+
+
+def test_the_inverse_of_an_x_rotation_rotates_in_the_opposite_direction():
+    p = point(0, 1, 0)
+    half_quarter = transformations.rotation_x(math.pi/4)
+    inverse = transformations.invert(half_quarter)
+    expected_rotated = point(0, math.sqrt(2)/2, -math.sqrt(2)/2)
+
+    with tf.Session() as sess:
+        [expected, actual] = sess.run([expected_rotated, inverse(p)])
+
+    assert(np.allclose(expected, actual))
