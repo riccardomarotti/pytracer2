@@ -1,14 +1,14 @@
 version: '3'
 services:
-  pytracer:
+  tftracer:
     user: tf
-    container_name: pytracer
+    container_name: tftracer
     image: laruen/tensorflow:latest
     environment:
       DISPLAY: $DISPLAY
     volumes:
       - '~/.Xauthority:/home/tf/.Xauthority:rw'
-      - '~/pytracer2:/home/tf/pytracer'
+      - '~/tftracer:/home/tf/tftracer'
       - '~/.gitconfig:/home/tf/.gitconfig'
       - './vscodeDotConfig:/home/tf/.vscode'
       - './vscodeGlobalConfig:/home/tf/.config/Code'
