@@ -1,6 +1,6 @@
-from pytracer.transformations import identity_matrix
-from pytracer.transformations import invert
-from pytracer.tuples import point, dot
+from tftracer.transformations import identity_matrix
+from tftracer.transformations import invert
+from tftracer.tuples import point, dot
 import numpy as np
 import tensorflow as tf
 

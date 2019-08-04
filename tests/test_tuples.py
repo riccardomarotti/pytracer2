@@ -1,4 +1,4 @@
-from pytracer.tuples import point, vector, normalize, dot, cross
+from tftracer.tuples import point, vector, normalize, dot, cross
 import tensorflow as tf
 import numpy as np
 import math

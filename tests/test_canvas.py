@@ -1,5 +1,5 @@
-from pytracer.canvas import Canvas
-from pytracer.colors import color, red
+from tftracer.canvas import Canvas
+from tftracer.colors import color, red
 import tensorflow as tf
 import numpy as np
 

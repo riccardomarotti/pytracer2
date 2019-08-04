@@ -1,7 +1,7 @@
 import tensorflow as tf
 import numpy as np
 import math
-from pytracer.tuples import point, vector
+from tftracer.tuples import point, vector
 
 
 def identity_matrix(x=None):

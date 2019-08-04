@@ -1,7 +1,7 @@
 import tensorflow as tf
 import numpy as np
-from pytracer import transformations
-from pytracer.tuples import point, vector
+from tftracer import transformations
+from tftracer.tuples import point, vector
 import math
 
 

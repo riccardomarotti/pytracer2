@@ -1,4 +1,4 @@
-from pytracer.colors import color
+from tftracer.colors import color
 import tensorflow as tf
 import numpy as np
 import math

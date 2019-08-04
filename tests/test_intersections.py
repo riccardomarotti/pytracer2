@@ -1,5 +1,5 @@
-from pytracer.intersections import hit
-from pytracer.spheres import Sphere
+from tftracer.intersections import hit
+from tftracer.spheres import Sphere
 
 import tensorflow as tf
 import numpy as np

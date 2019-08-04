@@ -1,7 +1,7 @@
-from pytracer.spheres import Sphere
-from pytracer import transformations
-from pytracer.rays import Ray
-from pytracer.tuples import point, vector
+from tftracer.spheres import Sphere
+from tftracer import transformations
+from tftracer.rays import Ray
+from tftracer.tuples import point, vector
 import numpy as np
 import tensorflow as tf
 import math
@@ -72,6 +72,3 @@ def test_a_sphere_behind_a_ary():
     assert(len(actual_xs) == 2)
     assert(actual_xs[0] == -6.0)
     assert(actual_xs[1] == -4.0)
-
-
-

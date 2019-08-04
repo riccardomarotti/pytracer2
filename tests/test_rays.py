@@ -1,6 +1,6 @@
 import tensorflow as tf
-from pytracer.tuples import point, vector
-from pytracer.rays import Ray
+from tftracer.tuples import point, vector
+from tftracer.rays import Ray
 
 
 def test_computing_a_point_from_a_distance():
