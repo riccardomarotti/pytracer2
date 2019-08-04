@@ -62,6 +62,7 @@ def test_a_ray_originates_inside_a_sphere():
     assert(actual_xs[0] == -1.0)
     assert(actual_xs[1] == 1.0)
 
+
 def test_a_sphere_behind_a_ary():
     xs = Sphere().intersect(Ray(point(0, 0, 5), vector(0, 0, 1)))
 
@@ -71,3 +72,6 @@ def test_a_sphere_behind_a_ary():
     assert(len(actual_xs) == 2)
     assert(actual_xs[0] == -6.0)
     assert(actual_xs[1] == -4.0)
+
+
+
