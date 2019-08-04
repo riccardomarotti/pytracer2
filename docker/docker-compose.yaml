@@ -12,6 +12,7 @@ services:
       - '~/.gitconfig:/home/tf/.gitconfig'
       - './vscodeDotConfig:/home/tf/.vscode'
       - './vscodeGlobalConfig:/home/tf/.config/Code'
+      - './fishConfig:/home/tf/.config/fish'
     network_mode: host
     stdin_open: true
     tty: true
