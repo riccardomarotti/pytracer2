@@ -14,7 +14,9 @@ class Sphere:
         return self._transformation
 
     def intersect(self, ray):
-        return perform_intersection(ray.origin, ray.direction)
+        transformation = invert(self.transformation)
+        transformed_ray = ray.transform(transformation)
+        return perform_intersection(transformed_ray.origin, transformed_ray.direction)
 
 
 def perform_intersection(origin, direction):

@@ -72,3 +72,17 @@ def test_a_sphere_behind_a_ary():
     assert(len(actual_xs) == 2)
     assert(actual_xs[0] == -6.0)
     assert(actual_xs[1] == -4.0)
+
+
+def test_intersecting_a_scaled_sphere_with_a_ray():
+    r = Ray(point(0., 0., -5.), vector(0., 0., 1.))
+    s = Sphere(transformations.scaling(2, 2, 2))
+
+    xs = s.intersect(r)
+
+    with tf.Session() as sess:
+        actual_xs = sess.run(xs)
+
+    assert(len(actual_xs) == 2)
+    assert(actual_xs[0] == 3)
+    assert(actual_xs[1] == 7)
