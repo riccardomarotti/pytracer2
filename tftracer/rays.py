@@ -13,3 +13,6 @@ class Ray:
 
     def position(self, distance):
         return self.origin + self.direction*distance
+
+    def transform(self, transform):
+        return Ray(transform(self.origin), transform(self.direction))
